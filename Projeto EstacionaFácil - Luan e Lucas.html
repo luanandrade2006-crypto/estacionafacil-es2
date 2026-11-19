@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EstacionaFácil - Decisões Inteligentes</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuração de fontes e cores customizadas via Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            sky: '#00c3ff',     /* Azul claro da esquerda */
+                            indigo: '#3f21df',  /* Roxo/Indigo da direita */
+                            cyan: '#00b8e6',    /* Cor do botão do formulário */
+                            cyanHover: '#00a3cc'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Pequenos ajustes para esconder outline padrão e melhorar acessibilidade */
+        input:focus {
+            outline: none;
+        }
+        /* Efeito de inclinação no badge para imitar o estilo do Zul+ */
+        .tilt-badge {
+            transform: rotate(-10deg);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-900 overflow-x-hidden">
+
+    <!-- 1. NAVEGAÇÃO SUPERIOR -->
+    <header class="bg-white h-20 w-full flex items-center justify-between px-6 lg:px-12 shadow-sm sticky top-0 z-50">
+        <!-- Logo -->
+        <div class="flex items-center gap-2 cursor-pointer">
+            <!-- Ícone de Estacionamento/Gráfico SVG -->
+            <svg class="w-8 h-8 text-brand-indigo" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-4H6V9h5.5c1.38 0 2.5 1.12 2.5 2.5S12.88 14 11.5 14H11v3zm.5-8H9v3h2.5c.83 0 1.5-.67 1.5-1.5S12.33 9 11.5 9z"/>
+                <!-- Barras de gráfico para simbolizar o RNF de métricas -->
+                <rect x="15" y="12" width="2" height="5" rx="1" fill="#00c3ff"/>
+                <rect x="18" y="9" width="2" height="8" rx="1" fill="#00c3ff"/>
+            </svg>
+            <span class="text-xl font-bold tracking-tight text-gray-800">
+                Estaciona<span class="text-brand-indigo">Fácil</span>
+            </span>
+        </div>
+
+        <!-- Links de Navegação (Escondidos no mobile) -->
+        <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-gray-600">
+            <a href="#" class="hover:text-brand-indigo transition-colors">Sobre o Sistema</a>
+            <a href="#" class="hover:text-brand-indigo transition-colors">Dashboard</a>
+            <a href="#" class="hover:text-brand-indigo transition-colors">Ajuda</a>
+            <!-- Divisor -->
+            <div class="w-px h-5 bg-gray-300"></div>
+            <a href="#" class="text-brand-indigo hover:text-indigo-800 transition-colors">Entrar</a>
+        </nav>
+
+        <!-- Menu Mobile Toggle (Apenas visual para o protótipo) -->
+        <button class="md:hidden text-gray-600 p-2">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+    </header>
+
+    <!-- 2. MAIN HERO SECTION (Split 50/50) -->
+    <main class="flex flex-col lg:flex-row w-full min-h-[calc(100vh-5rem)]">
+
+        <!-- 3. COLUNA ESQUERDA (Fundo Azul Claro com Imagem/Badge) -->
+        <section class="w-full lg:w-1/2 bg-brand-sky relative flex flex-col items-center justify-end overflow-hidden pt-12 lg:pt-0">
+            
+            <!-- Badge Circular 'Análise 360º' -->
+            <div class="absolute top-10 left-6 lg:top-16 lg:left-16 z-20 bg-green-400 rounded-full w-32 h-32 lg:w-40 lg:h-40 flex flex-col items-center justify-center text-white font-bold border-4 border-white tilt-badge">
+                <span class="text-sm lg:text-base uppercase tracking-wider mb-[-5px]">Análise</span>
+                <span class="text-4xl lg:text-5xl drop-shadow-md">360º</span>
+            </div>
+
+            <!-- Imagem Placeholder (Pessoas focadas em celular/dashboard - Estilo Moderno) -->
+            <div class="relative z-10 w-full max-w-lg mt-12 px-4">
+                <!-- Usando uma imagem do Unsplash que remete a negócio/tecnologia e tem o fundo removido/transparente na ideia -->
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800&ixlib=rb-4.0.3" 
+                     alt="Gestores analisando dados" 
+                     class="w-full h-auto rounded-t-3xl shadow-2xl object-cover border-4 border-white lg:border-b-0"
+                     style="max-height: 70vh; object-position: center top;">
+                
+                <!-- Mockup de Celular flutuante para dar profundidade -->
+                <div class="absolute -left-4 lg:-left-12 bottom-12 bg-white p-3 rounded-3xl shadow-2xl w-48 hidden sm:block border-4 border-gray-100">
+                    <div class="bg-gray-50 h-64 rounded-2xl p-4 flex flex-col gap-3">
+                        <div class="w-full h-8 bg-brand-sky rounded-lg opacity-20"></div>
+                        <div class="flex gap-2">
+                            <div class="w-1/2 h-16 bg-green-100 rounded-lg"></div>
+                            <div class="w-1/2 h-16 bg-red-100 rounded-lg"></div>
+                        </div>
+                        <div class="w-full h-24 bg-brand-indigo rounded-lg opacity-10"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Fundo decorativo (Círculos) -->
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white opacity-10 rounded-full mix-blend-overlay pointer-events-none"></div>
+        </section>
+
+
+        <!-- 4. COLUNA DIREITA (Fundo Indigo Escuro com Conteúdo e Formulário) -->
+        <section class="w-full lg:w-1/2 bg-brand-indigo px-6 py-16 lg:px-16 xl:px-24 flex flex-col justify-center">
+            
+            <div class="max-w-xl mx-auto lg:mx-0">
+                <!-- 5. Títulos -->
+                <h1 class="text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white leading-tight mb-6">
+                    Decisões inteligentes para o seu estacionamento
+                </h1>
+                <p class="text-lg lg:text-xl text-indigo-200 mb-10 font-light">
+                    Acompanhe métricas, avalie a satisfação dos clientes e gerencie todos os seus serviços em tempo real através do nosso painel gerencial.
+                </p>
+
+                <!-- 6. Card Branco Formulário de Acesso -->
+                <div class="bg-white rounded-3xl p-6 lg:p-8 shadow-2xl relative">
+                    
+                    <form class="space-y-5" onsubmit="event.preventDefault();">
+                        
+                        <!-- Grid de Inputs (Adaptando o conceito de side-by-side e stacked) -->
+                        <div class="space-y-4">
+                            
+                            <!-- Input E-mail Corporativo -->
+                            <div class="border border-gray-300 rounded-xl p-3 flex items-center focus-within:border-brand-indigo focus-within:ring-1 focus-within:ring-brand-indigo transition-all bg-gray-50 focus-within:bg-white hover:border-gray-400">
+                                <div class="flex-grow">
+                                    <label class="block text-[11px] font-bold text-gray-500 uppercase tracking-wide mb-1">E-mail corporativo</label>
+                                    <input type="email" class="w-full bg-transparent border-none p-0 text-gray-900 font-medium placeholder-gray-400 text-sm md:text-base focus:ring-0" placeholder="gestor@estacionafacil.com.br" required>
+                                </div>
+                                <div class="text-gray-400 pl-3 border-l border-gray-200 ml-2">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <!-- Input Senha -->
+                            <div class="border border-gray-300 rounded-xl p-3 flex items-center focus-within:border-brand-indigo focus-within:ring-1 focus-within:ring-brand-indigo transition-all bg-gray-50 focus-within:bg-white hover:border-gray-400">
+                                <div class="flex-grow">
+                                    <label class="block text-[11px] font-bold text-gray-500 uppercase tracking-wide mb-1">Senha de acesso</label>
+                                    <input type="password" class="w-full bg-transparent border-none p-0 text-gray-900 font-medium placeholder-gray-400 text-sm md:text-base focus:ring-0" placeholder="••••••••" required>
+                                </div>
+                                <div class="text-gray-400 pl-3 border-l border-gray-200 ml-2 cursor-pointer hover:text-brand-indigo">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Checkbox e Esqueceu a Senha -->
+                        <div class="flex items-center justify-between mt-2">
+                            <label class="flex items-center gap-2 cursor-pointer group">
+                                <input type="checkbox" class="w-4 h-4 text-brand-cyan bg-gray-100 border-gray-300 rounded focus:ring-brand-cyan focus:ring-2 cursor-pointer">
+                                <span class="text-sm font-medium text-gray-600 group-hover:text-gray-900 transition-colors">Lembrar de mim</span>
+                            </label>
+                            <a href="#" class="text-sm font-semibold text-brand-cyan hover:text-brand-cyanHover">Esqueci a senha</a>
+                        </div>
+
+                        <!-- Rodapé do Card: Termos + Botão (Layout inspirado no Zul+) -->
+                        <div class="flex flex-col-reverse md:flex-row md:items-center justify-between gap-6 pt-4">
+                            <p class="text-[11px] text-gray-400 leading-tight md:max-w-[180px]">
+                                Ao continuar, você aceita e concorda com os 
+                                <a href="#" class="underline text-gray-500 hover:text-brand-indigo">termos de uso</a> 
+                                do EstacionaFácil.
+                            </p>
+                            
+                            <!-- Botão Acessar -->
+                            <button type="submit" class="bg-brand-cyan hover:bg-brand-cyanHover text-white font-bold text-base py-3 px-8 rounded-full shadow-lg transition-transform transform active:scale-95 whitespace-nowrap w-full md:w-auto">
+                                Acessar Dashboard
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+
+                <!-- Garantia e Logos no Rodapé da Coluna (Estilo Zul+) -->
+                <div class="mt-8 flex items-center gap-6 opacity-70">
+                    <span class="text-white text-sm font-semibold">Uso Interno</span>
+                    
+                    <!-- Simulação de selo de segurança -->
+                    <div class="bg-white rounded p-1 flex items-center gap-1">
+                        <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="text-[10px] font-bold text-gray-800">SITE SEGURO</span>
+                    </div>
+
+                    <!-- Logo Secundária (Ex: Empresa parceira) -->
+                    <div class="flex items-center gap-1 text-white font-bold text-sm tracking-widest uppercase opacity-80">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m3-4h1m-1 4h1m-5 8h8"></path>
+                        </svg>
+                        Gestão
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>
